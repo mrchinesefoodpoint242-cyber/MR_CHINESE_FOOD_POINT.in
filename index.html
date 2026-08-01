@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MR Chinese Food Point | Fresh Chinese Food, Fast Delivery</title>
+<meta name="description" content="Order fresh, hygienic Pure Veg Chinese food online from MR Chinese Food Point. Momos, Noodles, Rice, Rolls & more delivered fast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= PRELOADER ================= -->
+<div class="preloader" id="preloader">
+  <div class="preloader-bowl">🍜</div>
+  <div class="preloader-text">MR Chinese Food Point</div>
+  <div class="preloader-bar"><span></span></div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <div class="brand">
+      <div class="brand-logo">🍜</div>
+      <div class="brand-text">
+        <h1>MR Chinese Food Point</h1>
+        <span class="veg-badge"><i class="veg-dot"></i> 100% Pure Veg</span>
+      </div>
+    </div>
+
+    <div class="header-search">
+      <input type="text" id="search" placeholder="Search for momos, noodles, rolls..." onkeyup="searchFood()">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-action" id="darkToggle" title="Toggle dark mode">🌙</button>
+      <button class="icon-action mobile-search-btn" id="mobileSearchBtn" title="Search">🔍</button>
+      <a href="tel:+917011869015" class="icon-action" title="Call restaurant">📞</a>
+      <button class="cart-btn" onclick="openCart()">
+        🛒 <span>Cart</span>
+        <span class="cart-count" id="count">0</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- mobile search drawer -->
+  <div class="mobile-search-wrap" id="mobileSearchWrap">
+    <input type="text" id="searchMobile" placeholder="Search for momos, noodles, rolls..." onkeyup="searchFoodMobile()">
+  </div>
+</header>
+
+<!-- ================= OFFER STRIP ================= -->
+<div class="offer-strip">
+  <div class="offer-strip-track">
+    <span>🔥 Flat entry to fresh hot momos everyday</span>
+    <span>🚀 Fast prep &amp; quick WhatsApp ordering</span>
+    <span>🌿 100% Pure Vegetarian Kitchen</span>
+    <span>⭐ Rated by 500+ happy customers</span>
+    <span>🔥 Flat entry to fresh hot momos everyday</span>
+    <span>🚀 Fast prep &amp; quick WhatsApp ordering</span>
+    <span>🌿 100% Pure Vegetarian Kitchen</span>
+    <span>⭐ Rated by 500+ happy customers</span>
+  </div>
+</div>
+
+<!-- ================= BANNER / HERO ================= -->
+<section class="banner" id="home">
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <span class="banner-eyebrow">Fresh • Fast • Pure Veg</span>
+    <h1>Delicious Chinese Food,<br>Delivered Hot &amp; Fresh</h1>
+    <p>Steaming momos, wok-tossed noodles &amp; crispy snacks — order in seconds, straight to WhatsApp.</p>
+    <div class="banner-actions">
+      <button class="btn-primary ripple" onclick="scrollToMenu()">Order Now</button>
+      <a href="tel:+917011869015" class="btn-outline ripple">📞 Call Us</a>
+    </div>
+    <div class="banner-stats">
+      <div><b>500+</b><span>Happy Customers</span></div>
+      <div><b>20+</b><span>Menu Items</span></div>
+      <div><b>4.7★</b><span>Average Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORY NAV ================= -->
+<nav class="category-nav" id="categoryNav">
+  <div class="category-track" id="categoryTrack">
+    <button class="chip active" data-cat="all" onclick="filterFood('all', this)">🍽️ All</button>
+    <button class="chip" data-cat="momos" onclick="filterFood('momos', this)">🥟 Momos</button>
+    <button class="chip" data-cat="noodles" onclick="filterFood('noodles', this)">🍜 Noodles</button>
+    <button class="chip" data-cat="rice" onclick="filterFood('rice', this)">🍚 Rice</button>
+    <button class="chip" data-cat="rolls" onclick="filterFood('rolls', this)">🌯 Rolls</button>
+    <button class="chip" data-cat="snacks" onclick="filterFood('snacks', this)">🍟 Snacks</button>
+    <button class="chip" data-cat="munchurian" onclick="filterFood('munchurian', this)">🍲 Munchurian</button>
+  </div>
+</nav>
+
+<!-- ================= MENU ================= -->
+<main class="menu-section" id="menu">
+  <div class="section-head">
+    <h2>Our Menu</h2>
+    <p>Freshly prepared, always hygienic — pick your favourites below</p>
+  </div>
+
+  <section class="menu-grid" id="menuGrid">
+
+    <!-- Skeleton loaders (shown briefly, then replaced by JS) -->
+    <div class="skeleton-card" data-skeleton>
+      <div class="skeleton-img"></div>
+      <div class="skeleton-line w70"></div>
+      <div class="skeleton-line w40"></div>
+      <div class="skeleton-line w90"></div>
+    </div>
+    <div class="skeleton-card" data-skeleton>
+      <div class="skeleton-img"></div>
+      <div class="skeleton-line w70"></div>
+      <div class="skeleton-line w40"></div>
+      <div class="skeleton-line w90"></div>
+    </div>
+    <div class="skeleton-card" data-skeleton>
+      <div class="skeleton-img"></div>
+      <div class="skeleton-line w70"></div>
+      <div class="skeleton-line w40"></div>
+      <div class="skeleton-line w90"></div>
+    </div>
+    <div class="skeleton-card" data-skeleton>
+      <div class="skeleton-img"></div>
+      <div class="skeleton-line w70"></div>
+      <div class="skeleton-line w40"></div>
+      <div class="skeleton-line w90"></div>
+    </div>
+
+    <!-- ACTUAL FOOD CARDS (hidden until skeleton removed) -->
+    <div class="food-card momos" data-cat="momos" data-name="Veg Steam Momos" data-price="50" hidden>
+      <div class="food-img-wrap">
+        <img src="veg momo.png" alt="Veg Steam Momos" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-bestseller">Bestseller</span>
+        <button class="fav-btn" onclick="toggleFav('Veg Steam Momos', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Veg Steam Momos</h3>
+          <span class="rating">⭐ 4.6</span>
+        </div>
+        <p class="food-desc">Soft steamed dumplings, veggie-packed, served with spicy chutney.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹50</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Veg Steam Momos" data-price="50"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card momos" data-cat="momos" data-name="Paneer Fried Momos" data-price="80" hidden>
+      <div class="food-img-wrap">
+        <img src="p.f.png" alt="Paneer Fried Momos" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-new">New</span>
+        <button class="fav-btn" onclick="toggleFav('Paneer Fried Momos', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Paneer Fried Momos</h3>
+          <span class="rating">⭐ 4.7</span>
+        </div>
+        <p class="food-desc">Crispy fried momos stuffed with spiced paneer filling.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹80</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Paneer Fried Momos" data-price="80"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card noodles" data-cat="noodles" data-name="Singapore Noodles" data-price="80" hidden>
+      <div class="food-img-wrap">
+        <img src="sin.png" alt="Singapore Noodles" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Singapore Noodles', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Singapore Noodles</h3>
+          <span class="rating">⭐ 4.5</span>
+        </div>
+        <p class="food-desc">Wok-tossed noodles with curry spices and fresh vegetables.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹80</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Singapore Noodles" data-price="80"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card snacks" data-cat="snacks" data-name="Honey Chili Potato" data-price="120" hidden>
+      <div class="food-img-wrap">
+        <img src="cilli.png" alt="Honey Chili Potato" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-popular">Popular</span>
+        <button class="fav-btn" onclick="toggleFav('Honey Chili Potato', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Honey Chili Potato</h3>
+          <span class="rating">⭐ 4.8</span>
+        </div>
+        <p class="food-desc">Crispy potato fingers tossed in sweet-spicy honey chili glaze.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹120</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Honey Chili Potato" data-price="120"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card snacks" data-cat="snacks" data-name="Chili Potato" data-price="80" hidden>
+      <div class="food-img-wrap">
+        <img src="cilli2.png" alt="Chili Potato" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Chili Potato', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Chili Potato</h3>
+          <span class="rating">⭐ 4.4</span>
+        </div>
+        <p class="food-desc">Classic crispy potato fingers tossed in spicy chili sauce.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹80</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Chili Potato" data-price="80"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card rice" data-cat="rice" data-name="Paneer Fried Rice" data-price="120" hidden>
+      <div class="food-img-wrap">
+        <img src="Paneer Fried Rice.png" alt="Paneer Fried Rice" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Paneer Fried Rice', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Paneer Fried Rice</h3>
+          <span class="rating">⭐ 4.6</span>
+        </div>
+        <p class="food-desc">Wok-fried rice loaded with soft paneer cubes and vegetables.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹120</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Paneer Fried Rice" data-price="120"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card rolls" data-cat="rolls" data-name="Veg Roll" data-price="50" hidden>
+      <div class="food-img-wrap">
+        <img src="veg roll.png" alt="Veg Roll" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Veg Roll', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Veg Roll</h3>
+          <span class="rating">⭐ 4.3</span>
+        </div>
+        <p class="food-desc">Soft rumali roti rolled with crunchy veggies &amp; tangy sauces.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹50</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Veg Roll" data-price="50"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card munchurian" data-cat="munchurian" data-name="Dry Munchurian" data-price="120" hidden>
+      <div class="food-img-wrap">
+        <img src="dry.png" alt="Dry Munchurian" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-popular">Popular</span>
+        <button class="fav-btn" onclick="toggleFav('Dry Munchurian', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Dry Munchurian</h3>
+          <span class="rating">⭐ 4.7</span>
+        </div>
+        <p class="food-desc">Crispy veg balls tossed in a bold, tangy Indo-Chinese sauce.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹120</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Dry Munchurian" data-price="120"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card momos" data-cat="momos" data-name="Veg Fried Momos" data-price="70" hidden>
+      <div class="food-img-wrap">
+        <img src="v.f.png" alt="Veg Fried Momos" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Veg Fried Momos', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Veg Fried Momos</h3>
+          <span class="rating">⭐ 4.5</span>
+        </div>
+        <p class="food-desc">Golden fried momos with a crisp shell and juicy veg filling.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹70</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Veg Fried Momos" data-price="70"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card momos" data-cat="momos" data-name="Paneer Momos" data-price="80" hidden>
+      <div class="food-img-wrap">
+        <img src="paneer.png" alt="Paneer Momos" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Paneer Momos', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Paneer Momos</h3>
+          <span class="rating">⭐ 4.6</span>
+        </div>
+        <p class="food-desc">Steamed momos filled with a rich, spiced paneer stuffing.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹80</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Paneer Momos" data-price="80"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card noodles" data-cat="noodles" data-name="Veg Chowmein" data-price="70" hidden>
+      <div class="food-img-wrap">
+        <img src="veg cho.png" alt="Veg Chowmein" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-bestseller">Bestseller</span>
+        <button class="fav-btn" onclick="toggleFav('Veg Chowmein', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Veg Chowmein</h3>
+          <span class="rating">⭐ 4.6</span>
+        </div>
+        <p class="food-desc">Classic street-style chowmein, wok-tossed with fresh veggies.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹70</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Veg Chowmein" data-price="70"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card noodles" data-cat="noodles" data-name="Hakka Noodles" data-price="80" hidden>
+      <div class="food-img-wrap">
+        <img src="hakka.png" alt="Hakka Noodles" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Hakka Noodles', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Hakka Noodles</h3>
+          <span class="rating">⭐ 4.5</span>
+        </div>
+        <p class="food-desc">Stir-fried Indo-Chinese noodles with soy &amp; fresh vegetables.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹80</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Hakka Noodles" data-price="80"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card snacks" data-cat="snacks" data-name="French Fries" data-price="60" hidden>
+      <div class="food-img-wrap">
+        <img src="french.png" alt="French Fries" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('French Fries', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>French Fries</h3>
+          <span class="rating">⭐ 4.4</span>
+        </div>
+        <p class="food-desc">Golden, crispy salted fries — a snack-time favourite.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹60</span>
+          </div>
+          <div class="qty-add-wrap" data-name="French Fries" data-price="60"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card rice" data-cat="rice" data-name="Veg Fried Rice" data-price="80" hidden>
+      <div class="food-img-wrap">
+        <img src="veg fried rice.png" alt="Veg Fried Rice" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Veg Fried Rice', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Veg Fried Rice</h3>
+          <span class="rating">⭐ 4.5</span>
+        </div>
+        <p class="food-desc">Classic wok-fried rice tossed with mixed fresh vegetables.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹80</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Veg Fried Rice" data-price="80"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card rolls" data-cat="rolls" data-name="Paneer Roll" data-price="70" hidden>
+      <div class="food-img-wrap">
+        <img src="paneer roll.png" alt="Paneer Roll" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-popular">Popular</span>
+        <button class="fav-btn" onclick="toggleFav('Paneer Roll', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Paneer Roll</h3>
+          <span class="rating">⭐ 4.7</span>
+        </div>
+        <p class="food-desc">Soft roti rolled with spiced paneer, onions &amp; tangy sauces.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹70</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Paneer Roll" data-price="70"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card munchurian" data-cat="munchurian" data-name="Gravy Munchurian" data-price="140" hidden>
+      <div class="food-img-wrap">
+        <img src="Gravy Munchurian.png" alt="Gravy Munchurian" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <span class="badge badge-bestseller">Bestseller</span>
+        <button class="fav-btn" onclick="toggleFav('Gravy Munchurian', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Gravy Munchurian</h3>
+          <span class="rating">⭐ 4.8</span>
+        </div>
+        <p class="food-desc">Soft veg balls simmered in a rich, spicy Indo-Chinese gravy.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹140</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Gravy Munchurian" data-price="140"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card snacks" data-cat="snacks" data-name="Burger" data-price="60" hidden>
+      <div class="food-img-wrap">
+        <img src="burger.png" alt="Burger" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Burger', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Burger</h3>
+          <span class="rating">⭐ 4.3</span>
+        </div>
+        <p class="food-desc">Loaded veg patty burger with fresh veggies &amp; sauces.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹60</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Burger" data-price="60"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card snacks" data-cat="snacks" data-name="Spring Roll" data-price="60" hidden>
+      <div class="food-img-wrap">
+        <img src="spring-roll.png" alt="Spring Roll" loading="lazy">
+        <span class="badge badge-veg">🟢</span>
+        <button class="fav-btn" onclick="toggleFav('Spring Roll', this)">🤍</button>
+      </div>
+      <div class="food-body">
+        <div class="food-top">
+          <h3>Spring Roll</h3>
+          <span class="rating">⭐ 4.5</span>
+        </div>
+        <p class="food-desc">Crispy fried rolls packed with fresh, crunchy vegetables.</p>
+        <div class="food-bottom">
+          <div class="price-block">
+            <span class="price">₹60</span>
+          </div>
+          <div class="qty-add-wrap" data-name="Spring Roll" data-price="60"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <p class="no-results" id="noResults" hidden>😕 No dishes found. Try another search or category.</p>
+</main>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="why-us">
+  <div class="section-head">
+    <h2>Why MR Chinese Food Point</h2>
+    <p>What makes us the go-to Chinese food spot nearby</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🌿</div>
+      <h3>100% Pure Veg</h3>
+      <p>A dedicated pure-veg kitchen — no compromises, ever.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔥</div>
+      <h3>Fresh &amp; Hot</h3>
+      <p>Every order is prepared fresh right after you place it.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h3>Fast Ordering</h3>
+      <p>Order directly on WhatsApp — no app downloads needed.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <h3>Great Value</h3>
+      <p>Generous portions at honest, wallet-friendly prices.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMINGS + LOCATION ================= -->
+<section class="info-section">
+  <div class="info-card">
+    <h3>🕒 Restaurant Timing</h3>
+    <ul>
+      <li><span>Mon – Sun</span><span>11:00 AM – 10:30 PM</span></li>
+    </ul>
+    <span class="status-open">● Open Now</span>
+  </div>
+  <div class="info-card">
+    <h3>📍 Find Us</h3>
+    <p>MR Chinese Food Point, Local Market Road, Your City</p>
+    <div class="info-actions">
+      <a class="btn-outline small" href="tel:+917011869015">📞 Call</a>
+      <a class="btn-outline small" href="https://www.google.com/maps/search/?api=1&query=MR+Chinese+Food+Point" target="_blank" rel="noopener">📍 Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="reviews-section">
+  <div class="section-head">
+    <h2>Customer Reviews</h2>
+    <p>What our regulars have to say</p>
+  </div>
+  <div class="reviews-track">
+    <div class="review-card">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p>"Best momos in the area! Always fresh and the chutney is amazing."</p>
+      <span class="reviewer">— Aarav Sharma</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p>"Ordering on WhatsApp is so convenient. Food arrives hot every time."</p>
+      <span class="reviewer">— Priya Mehta</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">⭐⭐⭐⭐</div>
+      <p>"Loved the Gravy Munchurian. Portion size is generous for the price."</p>
+      <span class="reviewer">— Rohan Gupta</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p>"Pure veg and genuinely tasty — my go-to Chinese spot now."</p>
+      <span class="reviewer">— Simran Kaur</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq-section">
+  <div class="section-head">
+    <h2>Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Is all your food purely vegetarian? <span>+</span></button>
+      <div class="faq-a"><p>Yes, MR Chinese Food Point is a 100% pure vegetarian kitchen — no exceptions.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I place an order? <span>+</span></button>
+      <div class="faq-a"><p>Add items to your cart, tap Checkout, and we'll generate a ready-made order message to send us on WhatsApp.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Do you offer home delivery? <span>+</span></button>
+      <div class="faq-a"><p>Yes, once you send your order on WhatsApp, our team will confirm delivery details with you directly.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What are your operating hours? <span>+</span></button>
+      <div class="faq-a"><p>We're open daily from 11:00 AM to 10:30 PM.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="brand footer-brand">
+        <div class="brand-logo">🥟</div>
+        <div class="brand-text">
+          <h1>MR Chinese Food Point</h1>
+          <span class="veg-badge"><i class="veg-dot"></i> 100% Pure Veg</span>
+        </div>
+      </div>
+      <p class="footer-about">Fresh, fast, and always pure vegetarian Chinese food — made with care, delivered with love.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="https://wa.me/917011869015" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#" onclick="openCart();return false;">Cart</a>
+      <a href="tel:+917011869015">Call Us</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>📍 Local Market Road, Your City</p>
+      <p>📞 +91 70118 69015</p>
+      <p>🕒 11:00 AM – 10:30 PM (Daily)</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Find Us</h4>
+      <div class="map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=restaurant&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Restaurant location map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> MR Chinese Food Point. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ================= FLOATING BUTTONS ================= -->
+<a href="https://wa.me/917011869015" target="_blank" rel="noopener" class="floating-whatsapp" title="Chat on WhatsApp">💬</a>
+<button class="scroll-top" id="scrollTop" title="Scroll to top">⬆</button>
+
+<button class="mobile-fab-cart" id="mobileFabCart" onclick="openCart()">
+  <span class="fab-left"><b id="fabCount">0 items</b><small>Tap to view cart</small></span>
+  <span class="fab-right" id="fabTotal">₹0 ›</span>
+</button>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<aside class="cart" id="cart">
+  <div class="cart-head">
+    <h2>🛒 Your Cart</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-summary">
+    <div class="summary-row"><span>Subtotal</span><span>₹<span id="subtotal">0</span></span></div>
+    <div class="summary-row"><span>GST (5%)</span><span>₹<span id="gst">0</span></span></div>
+    <div class="summary-row"><span>Delivery Charge</span><span id="deliveryLabel">₹20</span></div>
+    <div class="summary-row total-row"><span>Grand Total</span><span>₹<span id="total">0</span></span></div>
+  </div>
+
+  <div class="cart-actions">
+    <button class="btn-whatsapp ripple" onclick="whatsappOrder()">✅ Checkout on WhatsApp</button>
+    <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
+  </div>
+</aside>
+
+<!-- ================= BOTTOM MOBILE NAV ================= -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="scrollToId('home')"><span>🏠</span>Home</button>
+  <button class="nav-item" onclick="toggleMobileSearch()"><span>🔍</span>Search</button>
+  <button class="nav-item" onclick="scrollToMenu()"><span>📋</span>Menu</button>
+  <button class="nav-item" onclick="openCart()">
+    <span class="nav-cart-wrap">🛒<span class="nav-badge" id="navBadge" hidden>0</span></span>Cart
+  </button>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
