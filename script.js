@@ -12,9 +12,18 @@ const GST_RATE = 0.05;
 const DELIVERY_CHARGE = 20;
 const FREE_DELIVERY_ABOVE = 300;
 
+/* ---------- PAYMENT / TIMING CONFIG ---------- */
+const UPI_ID = "Q176355265@ybl";        // TODO: replace with the restaurant's real UPI ID
+const UPI_PAYEE_NAME = "MRChineseFoodPoint";
+const OPEN_HOUR = 11;    // 11:00 AM
+const OPEN_MIN  = 0;
+const CLOSE_HOUR = 22;   // 10:30 PM
+const CLOSE_MIN  = 30;
+
 /* ---------- STATE ---------- */
 let cart = JSON.parse(localStorage.getItem(STORAGE_CART_KEY) || "[]");
 let favourites = JSON.parse(localStorage.getItem(STORAGE_FAV_KEY) || "[]");
+let paymentMode = "cod"; // "cod" | "online"
 
 /* ---------- INIT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initRipple();
   document.getElementById("year").textContent = new Date().getFullYear();
   updateCart();
+  initStoreStatus();
 });
 
 /* =========================================================
@@ -289,6 +299,7 @@ function updateCart(){
 
   renderAllCardControls();
   renderCartItems();
+  if(paymentMode === "online") renderPaymentQR();
 }
 
 /* ---------- Drawer open/close ---------- */
@@ -417,5 +428,72 @@ function whatsappOrder(){
   msg += `*Grand Total: ₹${grandTotal}*%0A%0A`;
   msg += "Please confirm my order. Thank you!";
 
+  msg += `%0A%0A*Payment Mode:* ${paymentMode === "online" ? "Online (UPI)" : "Cash on Delivery"}`;
+  if(paymentMode === "online"){
+    msg += "%0A📎 Payment screenshot attached separately.";
+  }
+  if(!isStoreOpen()){
+    msg += "%0A%0A(Note: placing this order outside regular hours — please confirm timing.)";
+  }
+
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+}
+
+/* =========================================================
+   PAYMENT MODE (COD / Online UPI + QR)
+   ========================================================= */
+function setPaymentMode(mode){
+  paymentMode = mode;
+  document.getElementById("payCodBtn").classList.toggle("active", mode === "cod");
+  document.getElementById("payOnlineBtn").classList.toggle("active", mode === "online");
+  const panel = document.getElementById("qrPanel");
+  if(mode === "online"){
+    panel.hidden = false;
+    renderPaymentQR();
+  } else {
+    panel.hidden = true;
+  }
+}
+
+function getGrandTotal(){
+  let subtotal = 0;
+  cart.forEach(i => subtotal += i.price * i.qty);
+  const gst = Math.round(subtotal * GST_RATE);
+  const delivery = (subtotal === 0 || subtotal >= FREE_DELIVERY_ABOVE) ? 0 : DELIVERY_CHARGE;
+  return subtotal + gst + delivery;
+}
+
+function renderPaymentQR(){
+  const amount = getGrandTotal();
+  const upiUrl = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(UPI_PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent("Order Payment")}`;
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiUrl)}`;
+  document.getElementById("qrImage").src = qrSrc;
+  document.getElementById("qrAmount").textContent = amount;
+  document.getElementById("qrUpiId").textContent = UPI_ID;
+}
+
+/* =========================================================
+   LIVE RESTAURANT OPEN/CLOSED STATUS
+   ========================================================= */
+function isStoreOpen(now = new Date()){
+  const minutesNow = now.getHours() * 60 + now.getMinutes();
+  const openMinutes = OPEN_HOUR * 60 + OPEN_MIN;
+  const closeMinutes = CLOSE_HOUR * 60 + CLOSE_MIN;
+  return minutesNow >= openMinutes && minutesNow < closeMinutes;
+}
+
+function initStoreStatus(){
+  updateStoreStatus();
+  setInterval(updateStoreStatus, 60000); // refresh every minute
+}
+
+function updateStoreStatus(){
+  const open = isStoreOpen();
+  const badge = document.getElementById("statusBadge");
+  if(badge){
+    badge.textContent = open ? "● Open Now" : "● Closed Now";
+    badge.classList.toggle("closed", !open);
+  }
+  const strip = document.getElementById("cartStatusStrip");
+  if(strip) strip.hidden = open;
 }
