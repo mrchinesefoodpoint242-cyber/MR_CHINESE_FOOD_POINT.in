@@ -39,7 +39,7 @@
     <div class="header-actions">
       <button class="icon-action" id="darkToggle" title="Toggle dark mode">🌙</button>
       <button class="icon-action mobile-search-btn" id="mobileSearchBtn" title="Search">🔍</button>
-      <a href="tel:+917838561507" class="icon-action" title="Call restaurant">📞</a>
+      <a href="tel:+91 78385 61507" class="icon-action" title="Call restaurant">📞</a>
       <button class="cart-btn" onclick="openCart()">
         🛒 <span>Cart</span>
         <span class="cart-count" id="count">0</span>
@@ -77,7 +77,7 @@
     <p>Steaming momos, wok-tossed noodles &amp; crispy snacks — order in seconds, straight to WhatsApp.</p>
     <div class="banner-actions">
       <button class="btn-primary ripple" onclick="scrollToMenu()">Order Now</button>
-      <a href="tel:+917838561507" class="btn-outline ripple">📞 Call Us</a>
+      <a href="tel:+91 78385 61507" class="btn-outline ripple">📞 Call Us</a>
     </div>
     <div class="banner-stats">
       <div><b>500+</b><span>Happy Customers</span></div>
@@ -162,7 +162,7 @@
       <div class="food-img-wrap">
         <img src="p.f.png" alt="Paneer Fried Momos" loading="lazy">
         <span class="badge badge-veg">🟢</span>
-        <span class="badge badge-new">New</span>
+        <span class="badge badge-new"></span>
         <button class="fav-btn" onclick="toggleFav('Paneer Fried Momos', this)">🤍</button>
       </div>
       <div class="food-body">
@@ -561,15 +561,15 @@
   <div class="info-card">
     <h3>🕒 Restaurant Timing</h3>
     <ul>
-      <li><span>Mon – Sun</span><span>04:00 PM – 11:00 PM</span></li>
+      <li><span>Mon – Sun</span><span>11:00 AM – 10:30 PM</span></li>
     </ul>
-    <span class="status-open">● Open Now</span>
+    <span class="status-open" id="statusBadge">● Open Now</span>
   </div>
   <div class="info-card">
     <h3>📍 Find Us</h3>
     <p>MR Chinese Food Point, Local Market Road, Your City</p>
     <div class="info-actions">
-      <a class="btn-outline small" href="tel:+917838561507">📞 Call</a>
+      <a class="btn-outline small" href="tel:+917011869015">📞 Call</a>
       <a class="btn-outline small" href="https://www.google.com/maps/search/?api=1&query=MR+Chinese+Food+Point" target="_blank" rel="noopener">📍 Directions</a>
     </div>
   </div>
@@ -635,7 +635,7 @@
   <div class="footer-grid">
     <div class="footer-col">
       <div class="brand footer-brand">
-        <div class="brand-logo">🍜</div>
+        <div class="brand-logo">🥟</div>
         <div class="brand-text">
           <h1>MR Chinese Food Point</h1>
           <span class="veg-badge"><i class="veg-dot"></i> 100% Pure Veg</span>
@@ -645,7 +645,7 @@
       <div class="social-icons">
         <a href="#" aria-label="Instagram">📷</a>
         <a href="#" aria-label="Facebook">📘</a>
-        <a href="https://wa.me/917838561507" aria-label="WhatsApp">💬</a>
+        <a href="https://wa.me/917011869015" aria-label="WhatsApp">💬</a>
       </div>
     </div>
 
@@ -654,17 +654,14 @@
       <a href="#home">Home</a>
       <a href="#menu">Menu</a>
       <a href="#" onclick="openCart();return false;">Cart</a>
-      <a href="tel:+917838561507">Call Us</a>
+      <a href="tel:+917011869015">Call Us</a>
     </div>
 
     <div class="footer-col">
       <h4>Contact</h4>
-      <p>📍 Sabzi Mandi, Near Blinkit Store,
-Sector 15 Part 2,
-Patel Nagar,
-Gurugram, Haryana 122001</p>
-      <p>📞 +917838561507</p>
-      <p>🕒 04:00 PM – 11:00 PM (Daily)</p>
+      <p>📍Sabzi Mandi, near blinkit store, Sector 15 Part 2, Patel Nagar, Gurugram, Haryana 122001</p>
+      <p>📞 +91 78385 61507</p>
+      <p>🕒 4:00 PM – 11:00 PM (Daily)</p>
     </div>
 
     <div class="footer-col">
@@ -686,7 +683,7 @@ Gurugram, Haryana 122001</p>
 </footer>
 
 <!-- ================= FLOATING BUTTONS ================= -->
-<a href="https://wa.me/917838561507" target="_blank" rel="noopener" class="floating-whatsapp" title="Chat on WhatsApp">💬</a>
+<a href="https://wa.me/+91 78385 61507" target="_blank" rel="noopener" class="floating-whatsapp" title="Chat on WhatsApp">💬</a>
 <button class="scroll-top" id="scrollTop" title="Scroll to top">⬆</button>
 
 <button class="mobile-fab-cart" id="mobileFabCart" onclick="openCart()">
@@ -711,6 +708,31 @@ Gurugram, Haryana 122001</p>
     <div class="summary-row total-row"><span>Grand Total</span><span>₹<span id="total">0</span></span></div>
   </div>
 
+  <!-- ============ PAYMENT MODE ============ -->
+  <div class="payment-section">
+    <h4 class="payment-title">Payment Mode</h4>
+    <div class="payment-toggle">
+      <button type="button" class="pay-opt active" id="payCodBtn" onclick="setPaymentMode('cod')">
+        💵 Cash on Delivery
+      </button>
+      <button type="button" class="pay-opt" id="payOnlineBtn" onclick="setPaymentMode('online')">
+        📱 Pay Online (UPI)
+      </button>
+    </div>
+
+    <div class="qr-panel" id="qrPanel" hidden>
+      <img id="qrImage" class="qr-img" src="" alt="Scan to pay via UPI">
+      <p class="qr-amount">Scan &amp; Pay ₹<span id="qrAmount">0</span></p>
+      <p class="qr-upi">UPI ID: <b id="qrUpiId"></b></p>
+      <p class="qr-note">After paying, tap "Checkout on WhatsApp" and share your payment screenshot so we can confirm your order.</p>
+    </div>
+  </div>
+
+  <!-- ============ RESTAURANT STATUS ============ -->
+  <div class="cart-status-strip" id="cartStatusStrip" hidden>
+    ⏰ We're currently closed. You can still place your order — we'll prepare it when we open.
+  </div>
+
   <div class="cart-actions">
     <button class="btn-whatsapp ripple" onclick="whatsappOrder()">✅ Checkout on WhatsApp</button>
     <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
@@ -728,5 +750,28 @@ Gurugram, Haryana 122001</p>
 </nav>
 
 <script src="script.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAdy3jojzXXjtxunydgHHM1GyKmZTDF9Vk",
+    authDomain: "mr-chinese-food-point.firebaseapp.com",
+    projectId: "mr-chinese-food-point",
+    storageBucket: "mr-chinese-food-point.firebasestorage.app",
+    messagingSenderId: "977490818930",
+    appId: "1:977490818930:web:de081fd3b8488115168feb",
+    measurementId: "G-SPX1E87N6Y"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </body>
 </html>
